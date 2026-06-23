@@ -1,0 +1,8 @@
+export const Reports = () => {
+  return (
+    <div>
+      <h1 className='text-2xl font-bold'>Reports</h1>
+      <p>Contenido del Reports aquí.</p>
+    </div>
+  );
+};
