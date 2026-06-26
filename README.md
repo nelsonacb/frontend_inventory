@@ -1,15 +1,15 @@
 # 🖥️ Inventory Management Frontend
 
-[![React](https://img.shields.io/badge/React-18.x-61DAFB)](https://reactjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6)](https://www.typescriptlang.org/)
-[![Vite](https://img.shields.io/badge/Vite-5.x-646CFF)](https://vitejs.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.x-06B6D4)](https://tailwindcss.com/)
-[![Zustand](https://img.shields.io/badge/Zustand-4.x-brown)](https://zustand-demo.pmnd.rs/)
+[![React](https://img.shields.io/badge/React-19.x-61DAFB)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-6.x-3178C6)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-6.x-646CFF)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.x-06B6D4)](https://tailwindcss.com/)
+[![Zustand](https://img.shields.io/badge/Zustand-5.x-brown)](https://zustand-demo.pmnd.rs/)
 [![TanStack Table](https://img.shields.io/badge/TanStack_Table-8.x-FF4154)](https://tanstack.com/table)
 
 > A modern, responsive web application for small retail inventory management. Built with React, TypeScript, Tailwind CSS, Zustand, and TanStack Table.
 
-![App Screenshot](./screenshot.png) <!-- You can replace with your actual screenshot -->
+![App Screenshot](./public/Screenshot.png)
 
 ## ✨ Features
 
