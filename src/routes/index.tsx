@@ -3,7 +3,7 @@ import { Layout } from '../components/layout/Layout';
 import { Dashboard } from '../pages/Dashboard/index';
 import { Products } from '../pages/Products';
 import { CategoriesPage } from '../pages/Categories/index';
-import { Movements } from '../pages/Movements';
+import { MovementsPage } from '../pages/Movements';
 import { Alerts } from '../pages/Alerts/index';
 import { Reports } from '../pages/Reports';
 import { Scanner } from '../pages/Scanner/index';
@@ -31,7 +31,7 @@ export const router = createBrowserRouter([
           { index: true, element: <Dashboard /> },
           { path: 'products', element: <Products /> },
           { path: 'categories', element: <CategoriesPage /> },
-          { path: 'movements', element: <Movements /> },
+          { path: 'movements', element: <MovementsPage /> },
           { path: 'alerts', element: <Alerts /> },
           { path: 'reports', element: <Reports /> },
           { path: 'scanner', element: <Scanner /> },

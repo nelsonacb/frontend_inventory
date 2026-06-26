@@ -68,3 +68,79 @@ export interface ProductFormData {
   initialStock?: number;
   warehouseId?: number;
 }
+
+// export interface StockMovement {
+//   id: number;
+//   stockId: number;
+//   quantityChange: number;
+//   reason: 'purchase' | 'sale' | 'adjustment' | 'return' | 'transfer';
+//   notes?: string;
+//   date: string;
+//   createdBy?: number;
+//   user?: User;
+//   stock?: {
+//     product: Product & { total_stock?: number };
+//     warehouse: Warehouse;
+//   };
+// }
+
+// export interface MovementFormData {
+//   productId: number;
+//   warehouseId: number;
+//   quantityChange: number;
+//   reason: string;
+//   notes?: string;
+//   date: string;
+// }
+
+// export interface Stock {
+//   id: number;
+//   productId: number;
+//   warehouseId: number;
+//   quantity: number;
+// }
+
+export type MovementReason =
+  | 'purchase'
+  | 'sale'
+  | 'adjustment'
+  | 'return'
+  | 'transfer';
+
+export interface Stock {
+  id: number;
+  productId: number;
+  warehouseId: number;
+  quantity: number;
+  product: Product;
+  warehouse: Warehouse;
+}
+
+export interface Movement {
+  id: number;
+  stockId: number;
+  quantityChange: number;
+  reason: MovementReason;
+  notes: string | null;
+  date: string;
+  createdBy: number;
+  stock: Stock;
+  user: User;
+}
+
+export interface MovementCreatePayload {
+  stockId: number;
+  quantityChange: number;
+  reason: MovementReason;
+  notes?: string;
+}
+
+export interface PaginatedResponse<T> {
+  data: T[];
+  meta: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+  };
+}
