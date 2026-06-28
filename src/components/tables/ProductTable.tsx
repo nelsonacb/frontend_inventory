@@ -9,6 +9,7 @@ import type { Product, ProductFormData } from '../../interfaces';
 import { FiEdit2, FiTrash2, FiCode } from 'react-icons/fi';
 import { Button } from '../ui/Button';
 import { useToast } from '../../hooks/useToast';
+import { useConfirm } from '../../hooks/useConfirm';
 
 export const ProductTable = () => {
   const {
@@ -29,6 +30,7 @@ export const ProductTable = () => {
   const [qrModalOpen, setQrModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const { success } = useToast();
+  const { confirm } = useConfirm();
 
   useEffect(() => {
     fetchCategories(1, 100);
@@ -44,9 +46,16 @@ export const ProductTable = () => {
     setModalOpen(true);
   };
 
-  const handleDelete = (id: number) => {
-    if (confirm('¿Eliminar este producto?')) {
-      removeProduct(id);
+  const handleDelete = async (id: number) => {
+    const isConfirmed = await confirm({
+      title: 'Eliminar producto',
+      message: '¿Estás seguro de que quieres eliminar este producto?',
+      confirmText: 'Eliminar',
+      cancelText: 'Cancelar',
+    });
+
+    if (isConfirmed) {
+      await removeProduct(id);
       success('Producto eliminado con éxito');
     }
   };
@@ -95,7 +104,6 @@ export const ProductTable = () => {
       cell: ({ row }) => (
         <div className='flex gap-2 flex-wrap'>
           <Button
-            variant='primary'
             size='sm'
             onClick={() => handleEdit(row.original)}
           >
@@ -103,7 +111,6 @@ export const ProductTable = () => {
             Editar
           </Button>
           <Button
-            variant='danger'
             size='sm'
             onClick={() => handleDelete(row.original.id)}
           >

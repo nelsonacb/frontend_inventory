@@ -1,5 +1,6 @@
 import { RouterProvider } from 'react-router';
 import { ToastContainer } from 'react-toastify';
+import { ConfirmDialog } from './components/ui/ConfirmDialog';
 import { router } from './routes';
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,6 +20,7 @@ function App() {
         pauseOnHover
         theme='light'
       />
+      <ConfirmDialog />
       <RouterProvider router={router} />;
     </>
   );

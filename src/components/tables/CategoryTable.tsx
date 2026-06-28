@@ -8,6 +8,7 @@ import type { Category, CategoryFormData } from '../../interfaces';
 import { FiEdit2, FiTrash2 } from 'react-icons/fi';
 import { Button } from '../ui/Button';
 import { useToast } from '../../hooks/useToast';
+import { useConfirm } from '../../hooks/useConfirm';
 
 export const CategoryTable = () => {
   const {
@@ -21,6 +22,7 @@ export const CategoryTable = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [editingCategory, setEditingCategory] = useState<Category | null>(null);
   const { success } = useToast();
+  const { confirm } = useConfirm();
 
   useEffect(() => {
     fetchCategories(1, 10);
@@ -31,9 +33,16 @@ export const CategoryTable = () => {
     setModalOpen(true);
   };
 
-  const handleDelete = (id: number) => {
-    if (confirm('¿Eliminar esta categoría?')) {
-      removeCategory(id);
+  const handleDelete = async (id: number) => {
+    const isConfirmed = await confirm({
+      title: 'Eliminar categoría',
+      message: '¿Estás seguro de que quieres eliminar esta categoría?',
+      confirmText: 'Eliminar',
+      cancelText: 'Cancelar',
+    });
+
+    if (isConfirmed) {
+      await removeCategory(id);
       success('Categoría eliminada con éxito');
     }
   };
@@ -66,7 +75,6 @@ export const CategoryTable = () => {
       cell: ({ row }) => (
         <div className='flex gap-2'>
           <Button
-            variant='primary'
             size='sm'
             onClick={() => handleEdit(row.original)}
           >
@@ -74,7 +82,6 @@ export const CategoryTable = () => {
             Editar
           </Button>
           <Button
-            variant='danger'
             size='sm'
             onClick={() => handleDelete(row.original.id)}
           >

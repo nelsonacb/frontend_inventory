@@ -8,6 +8,7 @@ import type { Warehouse } from '../../interfaces';
 import { FiEdit2, FiTrash2 } from 'react-icons/fi';
 import { Button } from '../ui/Button';
 import { useToast } from '../../hooks/useToast';
+import { useConfirm } from '../../hooks/useConfirm';
 
 export const WarehouseTable = () => {
   const {
@@ -23,7 +24,7 @@ export const WarehouseTable = () => {
     null,
   );
   const { success } = useToast();
-  console.log('Datos:', warehouses);
+  const { confirm } = useConfirm();
 
   useEffect(() => {
     fetchWarehouses(1, 10);
@@ -34,9 +35,16 @@ export const WarehouseTable = () => {
     setModalOpen(true);
   };
 
-  const handleDelete = (id: number) => {
-    if (confirm('¿Eliminar este almacén?')) {
-      removeWarehouse(id);
+  const handleDelete = async (id: number) => {
+    const isConfirmed = await confirm({
+      title: 'Eliminar almacén',
+      message: '¿Estás seguro de que quieres eliminar este almacén?',
+      confirmText: 'Eliminar',
+      cancelText: 'Cancelar',
+    });
+
+    if (isConfirmed) {
+      await removeWarehouse(id);
       success('Almacén eliminado con éxito');
     }
   };
@@ -60,7 +68,6 @@ export const WarehouseTable = () => {
       cell: ({ row }) => (
         <div className='flex gap-2'>
           <Button
-            variant='primary'
             size='sm'
             onClick={() => handleEdit(row.original)}
           >
@@ -68,7 +75,6 @@ export const WarehouseTable = () => {
             Editar
           </Button>
           <Button
-            variant='danger'
             size='sm'
             onClick={() => handleDelete(row.original.id)}
           >
